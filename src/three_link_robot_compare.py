@@ -66,7 +66,7 @@ def simulate(tracking_type= "static theta1, dynamic for the rest",
                                                                       plot=False)
     
     # Generate Tracking Trajectory
-    print(f'{"Generating Trajectory":-^{padding}}')
+    print(f'{"Generating Plots":-^{padding}}')
     trajectory = scalar_scheduled_lqr_results[6]
     rs, r_dots = trajectory.generate_trajectory(single_lqr_results[0], type="deg")
     
@@ -146,19 +146,13 @@ def simulate(tracking_type= "static theta1, dynamic for the rest",
         file_name = "error"
         fig.savefig('./Figures/' + file_name + ".pdf")
     
-    # Print RMSE Errors
-    for rmse in rmse_errors:
-        print(rmse)
-    print("")
-    for rmse in rmse_errors_dot:
-        print(rmse)
-    
     # %---------------------------------------------- Torque ----------------------------------------------% #
+    total_torque = []
     fig, axs = plt.subplots(1, n_rows, sharex=True, figsize=(12, 4))
     for i in plot_set:
         for j in range(len(results_error_th)):
             axs[i].plot(t, results_u_ctrl[j][index_set[i]], c=colors[j], ls=line_styles[j], lw=lws[j], label=labels[j])
-            print(f"Total control effort |tau_{index_set[i]+1}| for {labels[j]}: {np.sum(np.abs(results_u_ctrl[j][index_set[i]])):.4f}")
+            total_torque+=[f"Total control effort |tau_{index_set[i]+1}| for {labels[j]}: {np.sum(np.abs(results_u_ctrl[j][index_set[i]])):.4f}"]
         axs[i].set_xlim([0, T_END])
         axs[i].set_ylabel(rf'$\tau_{index_set[i]+1}(t)$ [N$\cdot$m]')
         axs[i].set_xlabel(r'Time $[s]$')
@@ -218,3 +212,17 @@ def simulate(tracking_type= "static theta1, dynamic for the rest",
     plt.xlim(0, xnew[-1])
     if save_fig:
         fig.savefig('./Figures/scheduling_signal.pdf')
+    # %----------------------------------------------- Print Errors ----------------------------------------------% #
+    print(f'{"Printing Table Values":-^{padding}}')
+    # Print RMSE Errors
+    for rmse in rmse_errors:
+        print(rmse)
+    print("")
+    # Print RMSE Error Rates
+    for rmse in rmse_errors_dot:
+        print(rmse)
+    print("")
+    # Print Total Torques
+    for torque in total_torque:
+        print(torque)
+        
