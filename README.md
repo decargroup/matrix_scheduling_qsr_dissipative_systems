@@ -10,12 +10,12 @@ academic license can be requested [here](https://www.mosek.com/products/academic
 
 To clone the repository, run
 ```sh
-$ git clone git@github.com:SepehrMoalemi/Moalemi_Forbes_TAC_Matrix_Scheduling_of_QSR_Dissipative_Systems.git
+$ git clone git@github.com:SepehrMoalemi/matrix_scheduling_qsr_dissipative_systems.git
 ```
 
 To install all the required dependencies for this project, run
 ```sh
-$ cd Moalemi_Forbes_TAC_Matrix_Scheduling_of_QSR_Dissipative_Systems
+$ cd matrix_scheduling_qsr_dissipative_systems
 $ pip install -r ./requirements.txt
 ```
 
