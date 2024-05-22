@@ -1,12 +1,12 @@
 # Title   : Matrix-Scheduling of QSR-Dissipative Systems
-# Journal : IEEE Transactions on Automatic Control (TAC)
 # Authors : Sepehr Moalemi and James Richard Forbes
-# Code    :  Minimum Code to Reproduce the Application Example in Section VI
+# Code    : Minimum Code to Reproduce the Application Example in Section VI
 # %------------------------------------------ Packages -------------------------------------------% #
 from src import paper_plot
 from src import three_link_robot_compare 
 # %-------------------------------------------- Main ---------------------------------------------% #
 def main():
+    save_fig = False
     three_link_robot_compare.simulate(tracking_type="static theta1, dynamic for the rest",
                                       sys_type="Nonlinear",
                                       controller_type="QSR",
@@ -14,7 +14,7 @@ def main():
                                       model_uncertainty=True,
                                       T_END=15,
                                       plotting_type="paper_ready",
-                                      save_fig=True)
+                                      save_fig=save_fig)
 # %--------------------------------------------- Run ---------------------------------------------% #
 if __name__ == '__main__':
     print(f'{"Start":-^{50}}')

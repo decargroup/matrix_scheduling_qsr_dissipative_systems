@@ -3,9 +3,9 @@
 import pathlib
 import numpy as np
 
-from typing    import Tuple, List
+from typing import Tuple, List
 
-from src       import paper_plot
+from src import paper_plot
 # %------------------------------------------ Abstract Classes -------------------------------------% #
 class ManipulatorRobot(object):
     def __init__(self,
