@@ -52,7 +52,3 @@ def plt_subplot_vs_t(t, y1, y2, labels, title="",
     
     if path is not None:
         fig.savefig(path.joinpath(".png"))
-
-# Purpose: Show plots
-def show():
-    plt.show()

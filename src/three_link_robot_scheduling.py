@@ -188,11 +188,11 @@ def init_scheduling_signals(Ss,
                     
             # Full Column Rank Case
             elif rank == nu < ny:
-                raise NotImplemented
+                raise NotImplementedError
                 
             # Rank Deficient Case
             else:
-                raise NotImplemented
+                raise NotImplementedError
                 
         case "scalar":
             # Set all alphas to 1

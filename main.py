@@ -2,11 +2,20 @@
 # Authors : Sepehr Moalemi and James Richard Forbes
 # Code    : Minimum Code to Reproduce the Application Example in Section VI
 # %------------------------------------------ Packages -------------------------------------------% #
+import argparse
+import matplotlib.pyplot as plt
+
 from src import paper_plot
 from src import three_link_robot_compare 
 # %-------------------------------------------- Main ---------------------------------------------% #
 def main():
-    save_fig = False
+    # Set Figure Save Preferences
+    paper_plot.set_fig_preferences()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--savefig', action='store_true', default=False)
+    save_fig = parser.parse_args().savefig
+    
+    # Run Simulation
     three_link_robot_compare.simulate(tracking_type="static theta1, dynamic for the rest",
                                       sys_type="Nonlinear",
                                       controller_type="QSR",
@@ -18,7 +27,6 @@ def main():
 # %--------------------------------------------- Run ---------------------------------------------% #
 if __name__ == '__main__':
     print(f'{"Start":-^{50}}')
-    paper_plot.set_fig_preferences()
     main()
-    paper_plot.show()
+    plt.show()
     print(f'{"End":-^{50}}')

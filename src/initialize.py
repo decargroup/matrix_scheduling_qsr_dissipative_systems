@@ -44,7 +44,7 @@ def init_trajectory(DOF=3,
                       [ 7.0, np.array([[0], [  np.pi/4], [ np.pi/4]])], 
                       [ 9.0, np.array([[0], [ -np.pi/2], [8*np.pi/9]])]]
         case _: 
-            raise NotImplemented
+            raise NotImplementedError
     return tracking.Trajectory(DOF=DOF, tk=tk)
 
 # %------------------------------------ System Parameters --------------------------------------% #
@@ -75,7 +75,7 @@ def init_sys(DOF=3,
             params.update({"Kd": Kd})
             
         case _:
-            raise NotImplemented
+            raise NotImplementedError
         
     # Add Model Uncertainty
     def add_model_uncertainty(listVal, uncertainty):
@@ -114,14 +114,14 @@ def init_sys(DOF=3,
     if DOF == 3:
         return system.ThreeLinkManipulatorRobot(**params)
     else:
-        raise NotImplemented
+        raise NotImplementedError
 
 # %------------------------------------ Controller Picker --------------------------------------% #
 # Purpose: Initialize the controller
 def init_controller(sys, ctrl_typ="QSR") -> controller.controller:
     match ctrl_typ:
         case "QSR":     ctrl = QSR(sys)
-        case _: raise NotImplemented
+        case _: raise NotImplementedError
     return ctrl
 
 # %-------------------------------------- QSR Controllers --------------------------------------% #
@@ -132,7 +132,7 @@ def QSR(sys) -> controller.controller:
             if sys.DOF == 3:
                 return init_3DOF_QSR_non_square_controllers(sys)
         case _:
-            raise NotImplemented
+            raise NotImplementedError
     
 def init_3DOF_QSR_non_square_controllers(sys) -> controller.controller:
     # [Controller]: VSP_lqr Proportional control prewrap and gain
