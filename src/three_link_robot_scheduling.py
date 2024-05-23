@@ -118,13 +118,13 @@ def init_scheduling_signals(Ss,
                     
                     if and only if
                     A = U @ [sigma @ B_11 @ sigma^(-1), A_12;
-                              0,                        A_22] @ U.T
+                              0                       , A_22] @ U.T
                     B = V @ [B_11, 0;
                              B_21, B_22] @ V.T
                              
-                    So, 
-                    Sy_i = U @ [sigma @ B_11.T @ sigma^(-1), A_12;
-                                 0,                          A_22] @ U.T
+                    So, we have:
+                    Sy_i = U @ [sigma^(-1) @ B_11.T @ sigma, 0;
+                                A_12.T                     , A_22.T] @ U.T
                     Su_i = V @ [B_11, 0;
                                 B_21, B_22] @ V.T
                                 
@@ -142,31 +142,31 @@ def init_scheduling_signals(Ss,
                     ~ B_11 is 2x2, B_21 is 1x2, B_22 is 1x1
                     ~ A_12 and A_22 vanish
                     
-                    Having B_11 being diagonal, we have:
-                    ~ sigma @ B_11.T @ sigma^(-1) = B_11
-                    
-                    Therefore:
-                    ~ Sy_i = U @ B_11 @ U.T
+                    Here we have U = I and sigma = 1/2 * I, therefore:
+                    Sy_i = B_11.T
+                    Su_i = V @ [B_11, 0;
+                                B_21, B_22] @ V.T
+                                
+                    To furthere improve performance, it is possible to premultiply 
+                    V @ [B_11, 0;
+                         B_21, B_22] @ V.T
+                    symbolically.
                 """  
                 # Get SVD of S
-                U1, _, V1 = np.linalg.svd(Ss[0])
-                U2, _, V2 = np.linalg.svd(Ss[1])
-                U3, _, V3 = np.linalg.svd(Ss[2])
+                _, _, V1 = np.linalg.svd(Ss[0])
+                _, _, V2 = np.linalg.svd(Ss[1])
+                _, _, V3 = np.linalg.svd(Ss[2])
                 
                 # Set all alphas to 1
                 alphas = [1, 1, 1]
                 
                 # Set Bk_11 for k = 1, 2, 3
-                # B1_11 = lambda t: np.diag([s1(t),
-                #                            s1(t)])
                 B1_11 = lambda t: np.array([[s1(t), -0.5*s1(t)],
-                                             [0, 0]])
+                                             [0   , 0]])
                 
                 B2_11 = lambda t: np.diag([s2(t) + s1(t), 
                                            s2(t) + s3(t)])
                 
-                # B3_11 = lambda t: np.diag([s3(t), 
-                #                            s3(t)])
                 B3_11 = lambda t: np.array([[s3(t), 0],
                                             [s1(t), s3(t)]])
                 
@@ -182,9 +182,9 @@ def init_scheduling_signals(Ss,
                                                 [0, 0, s2(t) + s3(t)]]) @ V3.T
                 
                 # Set S_y
-                Sy_1 = lambda t: alphas[0] * U1 @ B1_11(t).T @ U1.T
-                Sy_2 = lambda t: alphas[1] * U2 @ B2_11(t).T @ U2.T
-                Sy_3 = lambda t: alphas[2] * U3 @ B3_11(t).T @ U3.T
+                Sy_1 = lambda t: alphas[0] * B1_11(t).T 
+                Sy_2 = lambda t: alphas[1] * B2_11(t).T 
+                Sy_3 = lambda t: alphas[2] * B3_11(t).T 
                     
             # Full Column Rank Case
             elif rank == nu < ny:
