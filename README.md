@@ -21,11 +21,11 @@ $ pip install -r ./requirements.txt
 
 ## Usage
 To generate Figure 6 and Figure 9 in the paper, run
-```
+```sh
 $ python main.py
 ```
 
-The plots can be saved to `./Figures` by setting 
-```py
-save_fig = True
+The plots can be saved to `./Figures` by running 
+```sg
+$ python main.py --savefig
 ```
