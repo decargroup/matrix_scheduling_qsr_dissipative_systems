@@ -1,4 +1,4 @@
-# Purpose: Generate Plots in Figures 6 and 9
+# Purpose: Generate Plots in Figures 6-9
 # %------------------------------------------ Packages -------------------------------------------% #
 import numpy as np
 import matplotlib.pyplot as plt
@@ -165,17 +165,6 @@ def simulate(tracking_type= "static theta1, dynamic for the rest",
         
     # %----------------------------------------------- Signals ----------------------------------------------% #
     match tracking_type:
-        case "dynamic":
-            # [Scheduling Signals]: Set up scheduling signals   
-            s1 = lambda t: 1 - (t/3)**4 if t<=3 else 0
-            s2 = lambda t: 1 - ((t-3)/2.8)**4 if 0.2<=t<=5.8 else 0
-            def s3(t):
-                if t<5:
-                    return 0
-                elif t<=7:
-                    return 1 - ((t-7.5)/2.5)**4
-                else:
-                    return 1 
         case "static theta1, dynamic for the rest":
             def s1(t):
                 if t<1:
