@@ -20,7 +20,7 @@ $ pip install -r ./requirements.txt
 ```
 
 ## Usage
-To generate Figure 6 and Figure 9 in the paper, run
+To generate Figures 6-9 in the paper, run
 ```sh
 $ python main.py
 ```
