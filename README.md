@@ -1,6 +1,6 @@
 # Matrix-Scheduling of QSR-Dissipative Systems
 
-Accompanying code for the control of the planar rigid three-link robotic manipulator used in Section VI of Matrix-Scheduling of QSR-Dissipative Systems
+Accompanying code for the control of the planar rigid three-link robotic manipulator used in Section VI of Matrix-Scheduling of QSR-Dissipative Systems.
 
 ## Required License
 The LMI solver used along CVXPY is MOSEK, which requires a license to use. A personal
