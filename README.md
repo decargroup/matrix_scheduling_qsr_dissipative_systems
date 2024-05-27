@@ -10,7 +10,7 @@ academic license can be requested [here](https://www.mosek.com/products/academic
 
 To clone the repository, run
 ```sh
-$ git clone git@github.com:SepehrMoalemi/matrix_scheduling_qsr_dissipative_systems.git
+$ git clone git@github.com:decargroup/matrix_scheduling_qsr_dissipative_systems.git
 ```
 
 To install all the required dependencies for this project, run
